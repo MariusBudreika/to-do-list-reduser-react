@@ -2,16 +2,28 @@ import React, { useState, useReducer } from "react";
 import "./App.css";
 import Todo from "./components/Todo";
 
-const ACTIONS = {
+export const ACTIONS = {
   ADD_TO_DO: "add-todo",
   TOGGLE_TO_DO: "toggle-todo",
+  DELETE_TO_DO: "delete-todo",
 };
 
 const reducer = (todos, action) => {
   switch (action.type) {
     case ACTIONS.ADD_TO_DO:
       return [...todos, newTodo(action.payload.task)];
-    // case ACTIONS.TOGGLE_TO_DO:
+    case ACTIONS.TOGGLE_TO_DO:
+      return todos.map((todo) => {
+        if (todo.id === action.payload.id) {
+          return { ...todo, complete: !todo.complete };
+        }
+        return todo;
+      });
+    case ACTIONS.DELETE_TO_DO:
+      return todos.filter((todo) => todo.id !== action.payload.id);
+
+    default:
+      return todos;
   }
 };
 
@@ -41,7 +53,7 @@ function App() {
         />
       </form>
       {todos.map((todo) => {
-        return <Todo key={todo.id} todo={todo} />;
+        return <Todo key={todo.id} todo={todo} dispatch={dispatch} />;
       })}
     </div>
   );
