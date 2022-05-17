@@ -47,6 +47,7 @@ function App() {
     <div classtask="App">
       <form onSubmit={submitHandler}>
         <input
+          className="input"
           type="text"
           value={task}
           onChange={(e) => setTask(e.target.value)}

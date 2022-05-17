@@ -1,0 +1,10 @@
+.listContainer {
+    display: flex;
+    margin: 1rem auto;
+    align-items: center;
+    width: 20rem;
+   }
+
+.listContainerSpan {
+    margin-right: 1rem;
+}
